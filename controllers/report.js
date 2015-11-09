@@ -8,6 +8,18 @@ function report (request, response) {
   response.render('report.html', contextData);
 }
 
+function report2 (request, response) {
+  var contextData = {};
+  response.render('report2.html', contextData);
+}
+
+function report3 (request, response) {
+  var contextData = {};
+  response.render('report3.html', contextData);
+}
+
 module.exports = {
-  report: report
+   'report' : report ,
+  'report2' : report ,
+  'report3' : report
 };
