@@ -20,6 +20,6 @@ function report3 (request, response) {
 
 module.exports = {
    'report' : report ,
-  'report2' : report ,
-  'report3' : report
+  'report2' : report2 ,
+  'report3' : report3
 };
