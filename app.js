@@ -25,6 +25,7 @@ app.get('/events', eventControllers.listEvents);
 app.get('/Report', reportControllers.report);
 app.get('/Report2', report2Controllers.report);
 app.get('/events/new', eventControllers.newEvent);
+app.get('/api/events', eventControllers.api);
 app.post('/events/new', eventControllers.saveEvent);
 
 module.exports = app;
