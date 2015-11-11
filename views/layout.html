@@ -2,13 +2,16 @@
 <html>
   <head>
     <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='bootstrap' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' />
   </head>
 
 	<body class="container">
 
     {% block header %}
-      <header>Hey, I'm in the header</header>
+      <header>Hey, I'm in the header
+      <link rel='bootstrap' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' />
+      </header>
     {% endblock %}
 
     {% block mainContent %}
@@ -16,13 +19,9 @@
     {% endblock %}
 
     {% block footer %}
-      <footer>This be the footer.</footer>
+      <footer>This be the footer. Look at me customize the footer. The time is now {{time}}.
+          <a href="/">Home</a> &gt; <a href="/about">About us</a>.
+      </footer>
     {% endblock %}
-
   </body>
-<footer>
-    Look at me customize the footer. The time is now {{time}}.
-    <a href="/">Index</a>
-    <a href="/about">About us</a>.
-</footer>
 </html>
