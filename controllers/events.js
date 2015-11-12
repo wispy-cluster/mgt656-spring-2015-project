@@ -60,6 +60,14 @@ function saveEvent(request, response){
   if (validator.isLength(request.body.title, 5, 50) === false) {
     contextData.errors.push('Your title should be between 5 and 100 letters.');
   }
+  var year = parseInt(request.body.year);
+  if(year!==2015 && year!==2016 || !validator.isInt(request.body.year)){
+    contextData.errors.push('Year of the event should be an integer and 2015 or 2016');
+  }
+  var month = parseInt(request.body.month);
+  if(!validator.isInt(request.body.month) || month >11 || month <0 ){
+    contextData.errors.push('Month should be an integer and between 0 and 11');
+  }
 
 
   if (contextData.errors.length === 0) {
