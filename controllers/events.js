@@ -60,15 +60,43 @@ function saveEvent(request, response){
   if (validator.isLength(request.body.title, 5, 50) === false) {
     contextData.errors.push('Your title should be between 5 and 100 letters.');
   }
+    
+    var day = parseInt(request.body.day,10); 
+    
+    if(day > 31 || day < 0 ){
+    contextData.errors.push('Day should not be greater than 31');
+  }
+  
+  if(day < 1 ){
+    contextData.errors.push('Day should not be less than 31');
+  }
+  
+  if (validator.isInt(request.body.day) === false) {
+    contextData.errors.push('Your day should be an integer.');
+  }
   var year = parseInt(request.body.year);
+  
   if(year!==2015 && year!==2016 || !validator.isInt(request.body.year)){
     contextData.errors.push('Year of the event should be an integer and 2015 or 2016');
   }
-  var month = parseInt(request.body.month);
+  var month = parseInt(request.body.month); 
+  
   if(!validator.isInt(request.body.month) || month >11 || month <0 ){
     contextData.errors.push('Month should be an integer and between 0 and 11');
   }
-
+  
+  if (validator.isInt(request.body.hour) === false) {
+    contextData.errors.push('Your hour should be an integer.');
+  
+  }
+  
+  if (hour > 23) {
+    contextData.errors.push('Your hour should not be greater 23.');
+  }
+  
+ if (hour < 0) {
+    contextData.errors.push('Your hour should not be less than 0.');
+  }
 
   if (contextData.errors.length === 0) {
     var newEvent = {
@@ -83,6 +111,7 @@ function saveEvent(request, response){
   }else{
     response.render('create-event.html', contextData);
   }
+  
 }
 
 function eventDetail (request, response) {
@@ -107,6 +136,10 @@ function rsvp (request, response){
     contextData.errors.push('Invalid email');
     response.render('event-detail.html', contextData);    
   }
+  
+  
+  
+  
 
 }
 
