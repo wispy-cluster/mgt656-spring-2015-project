@@ -20,7 +20,7 @@ function report3 (request, response) {
 
 function report4 (request, response) {
   var contextData = {};
-  response.render('report3.html', contextData);
+  response.render('report4.html', contextData);
 }
 
 function backlog (request, response) {
