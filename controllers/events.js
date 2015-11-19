@@ -65,11 +65,19 @@ function saveEvent(request, response){
     contextData.errors.push('Year of the event should be an integer and 2015 or 2016');
   }
   var month = parseInt(request.body.month);
-  if(!validator.isInt(request.body.month) || month >11 || month <0 ){
-    contextData.errors.push('Month should be an integer and between 0 and 11');
+  if(!validator.isInt(request.body.month) || month >11 || month < 1 ){
+    contextData.errors.push('Month should be an integer and between 1 and 11');
   }
-
-
+  var day = parseInt(request.body.day);
+  if(!validator.isInt(request.body.day) || day > 31 || day < 1 ){
+    contextData.errors.push('Day should be an integer and between 1 and 31');
+  }
+  var hour = parseInt(request.body.hour);
+  if(!validator.isInt(request.body.hour) || hour > 23 || hour < 0 ){
+    contextData.errors.push('Hour should be an integer and between 0 and 23');
+  }
+  
+  
   if (contextData.errors.length === 0) {
     var newEvent = {
       title: request.body.title,
