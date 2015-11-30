@@ -60,8 +60,25 @@ function saveEvent(request, response){
   if (validator.isLength(request.body.title, 5, 50) === false) {
     contextData.errors.push('Your title should be between 5 and 100 letters.');
   }
+  var year = parseInt(request.body.year);
+  if(year!==2015 && year!==2016 || !validator.isInt(request.body.year)){
+    contextData.errors.push('Year of the event should be an integer and 2015 or 2016');
+  }
+  var month = parseInt(request.body.month);
+  if(!validator.isInt(request.body.month) || month >11 || month < 1 ){
+    contextData.errors.push('Month should be an integer and between 1 and 11');
+  }
 
-
+  var day = parseInt(request.body.day);
+  if(!validator.isInt(request.body.day) || day > 31 || day < 1 ){
+    contextData.errors.push('Day should be an integer and between 1 and 31');
+  }
+  var hour = parseInt(request.body.hour);
+  if(!validator.isInt(request.body.hour) || hour > 23 || hour < 0 ){
+    contextData.errors.push('Hour should be an integer and between 0 and 23');
+  }
+  
+  
   if (contextData.errors.length === 0) {
     var newEvent = {
       title: request.body.title,
@@ -85,26 +102,49 @@ function eventDetail (request, response) {
   response.render('event-detail.html', {event: ev});
 }
 
+
 function rsvp (request, response){
   var ev = events.getById(parseInt(request.params.id));
+  var contextData = {errors: [], event: ev};
   if (ev === null) {
     response.status(404).send('No such event');
   }
-
   if(validator.isEmail(request.body.email)){
-    ev.attending.push(request.body.email);
-    response.redirect('/events/' + ev.id);
-  }else{
-    var contextData = {errors: [], event: ev};
+    if (validator.contains(request.body.email.toLowerCase(), '@yale.edu')){
+      ev.attending.push(request.body.email);
+      response.redirect('/events/' + ev.id);
+    }
+    else{
+    contextData.errors.push('Only Yalies are allowed');
+    response.render('event-detail.html', contextData);    
+    }
+  }
+  else{
     contextData.errors.push('Invalid email');
     response.render('event-detail.html', contextData);    
   }
-
 }
 
 function api (request, response){
-  var output = {events: events.all};
-  response.send(output);
+  var output = {events: []};
+  var search = request.query.search;
+  var detailpage = request.query.detailpage;
+  
+  if(search){
+    for (var i = 0; i < events.all.length; i++){
+      if(events.all[i].title.indexOf(search) !== -1){
+        output.events.push(events.all[i]);
+      }
+    }
+  }else if(detailpage){
+      for (var i = 0; i < events.all.length; i++){
+      if(events.all[i].id.indexOf(detailpage) !== -1){
+        output.events.push(events.all[i]);
+      }
+    }
+    output.events = events.all;
+  }
+  response.json(output);
 }
 
 /**
