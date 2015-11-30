@@ -60,6 +60,10 @@ function saveEvent(request, response){
   if (validator.isLength(request.body.title, 5, 50) === false) {
     contextData.errors.push('Your title should be between 5 and 100 letters.');
   }
+  
+  if (validator.isLength(request.body.location, 5, 50) === false) {
+    contextData.errors.push('Your location should be between 5 and 100 letters.');
+  }
   var year = parseInt(request.body.year);
   if(year!==2015 && year!==2016 || !validator.isInt(request.body.year)){
     contextData.errors.push('Year of the event should be an integer and 2015 or 2016');
