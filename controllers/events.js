@@ -68,8 +68,6 @@ function saveEvent(request, response){
   if(!validator.isInt(request.body.month) || month >11 || month <0 ){
     contextData.errors.push('Month should be an integer and between 0 and 11');
   }
-
-
   if (contextData.errors.length === 0) {
     var newEvent = {
       title: request.body.title,
@@ -93,21 +91,27 @@ function eventDetail (request, response) {
   response.render('event-detail.html', {event: ev});
 }
 
+
 function rsvp (request, response){
   var ev = events.getById(parseInt(request.params.id));
+  var contextData = {errors: [], event: ev};
   if (ev === null) {
     response.status(404).send('No such event');
   }
-
   if(validator.isEmail(request.body.email)){
-    ev.attending.push(request.body.email);
-    response.redirect('/events/' + ev.id);
-  }else{
-    var contextData = {errors: [], event: ev};
+    if (validator.contains(request.body.email.toLowerCase(), '@yale.edu')){
+      ev.attending.push(request.body.email);
+      response.redirect('/events/' + ev.id);
+    }
+    else{
+    contextData.errors.push('Only Yalies are allowed');
+    response.render('event-detail.html', contextData);    
+    }
+  }
+  else{
     contextData.errors.push('Invalid email');
     response.render('event-detail.html', contextData);    
   }
-
 }
 
 function api (request, response){
