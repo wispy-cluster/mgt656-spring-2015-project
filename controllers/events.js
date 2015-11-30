@@ -72,7 +72,6 @@ function saveEvent(request, response){
   if(!validator.isInt(request.body.month) || month >11 || month < 1 ){
     contextData.errors.push('Month should be an integer and between 1 and 11');
   }
-
   var day = parseInt(request.body.day);
   if(!validator.isInt(request.body.day) || day > 31 || day < 1 ){
     contextData.errors.push('Day should be an integer and between 1 and 31');
@@ -80,6 +79,10 @@ function saveEvent(request, response){
   var hour = parseInt(request.body.hour);
   if(!validator.isInt(request.body.hour) || hour > 23 || hour < 0 ){
     contextData.errors.push('Hour should be an integer and between 0 and 23');
+  }
+  var image = parseInt(request.body.image);
+  if(!validator.isURL(request.body.image)){
+    contextData.errors.push('Image should be a URL');
   }
   
   
