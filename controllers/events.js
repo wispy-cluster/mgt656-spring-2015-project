@@ -121,6 +121,7 @@ function rsvp (request, response){
 function api (request, response){
   var output = {events: []};
   var search = request.query.search;
+  var detailpage = request.query.detailpage;
   
   if(search){
     for (var i = 0; i < events.all.length; i++){
@@ -128,7 +129,12 @@ function api (request, response){
         output.events.push(events.all[i]);
       }
     }
-  }else{
+  }else if(detailpage){
+      for (var i = 0; i < events.all.length; i++){
+      if(events.all[i].id.indexOf(detailpage) !== -1){
+        output.events.push(events.all[i]);
+      }
+    }
     output.events = events.all;
   }
   response.json(output);
