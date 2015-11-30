@@ -69,7 +69,10 @@ function saveEvent(request, response){
     contextData.errors.push('Month should be an integer and between 1 and 11');
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> formerrors
   var day = parseInt(request.body.day);
   if(!validator.isInt(request.body.day) || day > 31 || day < 1 ){
     contextData.errors.push('Day should be an integer and between 1 and 31');
@@ -80,6 +83,9 @@ function saveEvent(request, response){
   }
   
   
+<<<<<<< HEAD
+>>>>>>> formerrors
+=======
 >>>>>>> formerrors
   if (contextData.errors.length === 0) {
     var newEvent = {
