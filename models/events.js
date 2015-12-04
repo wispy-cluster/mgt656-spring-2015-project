@@ -18,7 +18,7 @@ var allEvents = [
   {
     id: 1,
     title: 'BBQ party for hackers and nerds',
-    date:   new Date(2015, 8, 1, 19, 0, 0),
+    date:   new Date(2016, 8, 1, 19, 0, 0),
     image: 'http://i.imgur.com/7pe2k.gif',
     location: 'Miles\' house',
     attending: ['kyle.jensen@yale.edu', 'kim.kardashian@yale.edu']

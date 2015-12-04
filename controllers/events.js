@@ -57,6 +57,9 @@ function newEvent(request, response){
 function saveEvent(request, response){
   var contextData = {errors: []};
 
+
+
+
   if (validator.isLength(request.body.title, 5, 50) === false) {
     contextData.errors.push('Your title should be between 5 and 100 letters.');
   }
@@ -86,18 +89,39 @@ function saveEvent(request, response){
   }
   
   
+  
+  
   if (contextData.errors.length === 0) {
+    
+// the number of the last member of AllEvents+1
+    var thenewid = events.all.length+1;
+
+
+    
     var newEvent = {
+      id: thenewid,
       title: request.body.title,
       location: request.body.location,
       image: request.body.image,
-      date: new Date(),
+      date: new Date(year, month, day, hour),
       attending: []
     };
+// this need work to get theh actual data from the form
+
+
     events.all.push(newEvent);
-    response.redirect('/events');
+
+
+
+    response.redirect('/events/'+thenewid);
+
+/*    response.redirect('/events/:id');  
+  */   
   }else{
+  
     response.render('create-event.html', contextData);
+  
+    
   }
 }
 
