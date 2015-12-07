@@ -171,29 +171,48 @@ function rsvp (request, response){
     response.render('event-detail.html', contextData);    
   }
 }
-
+/*function api (request, response){
+  var output = {events: []};
+  var search = request.query.search;
+  
+  if(search){
+    for (var i = 0; i < events.all.length; i++){
+      if(events.all[i].title.indexOf(search) !== -1){
+        output.events.push(events.all[i]);
+      }else if(events.all[i].attending.indexOf(search) !== -1){
+        output.events.push(events.all[i]);
+      }
+      }
+    }
+    else{
+      for (var i = 0; i < events.all.length; i++){
+        output.events.push(events.all[i]);
+    }
+    output.events = events.all;
+  }
+  response.json(output);
+}
+*/
 function api (request, response){
   var output = {events: []};
   var search = request.query.search;
-  var detailpage = request.query.detailpage;
   
   if(search){
     for (var i = 0; i < events.all.length; i++){
       if(events.all[i].title.indexOf(search) !== -1){
         output.events.push(events.all[i]);
       }
-    }
-  }else if(detailpage){
-      for (var i = 0; i < events.all.length; i++){
-      if(events.all[i].id.indexOf(detailpage) !== -1){
-        output.events.push(events.all[i]);
+      else{
+        for (var j = 0; j < events.all[i].attending.length; j++){
+          if(validator.contains(events.all[i].attending[j], search)){
+            output.events.push(events.all[i]);
+          }
+        }
+      }
       }
     }
-    output.events = events.all;
-  }
-  response.json(output);
+    response.json(output);
 }
-
 /**
  * Export all our functions (controllers in this case, because they
  * handles requests and render responses).
