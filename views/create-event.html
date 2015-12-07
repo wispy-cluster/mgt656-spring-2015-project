@@ -51,8 +51,8 @@
     <div class="form-group">
       <label for="day">Event day:</label>
       <select name="day" id="day">
-        {% for dayNumber, dayName in allowedDateInfo.days %}
-          <option value="{{dayNumber}}">{{dayName}}</option>
+        {% for day in allowedDateInfo.days %}
+          <option value="{{day}}">{{day}}</option>
         {% endfor %}
       </select>
     </div>

@@ -2,7 +2,7 @@
 
 var events = require('../models/events');
 var validator = require('validator');
-var _ = require('lodash');
+var lodash = require('lodash')
 // Date data that would be useful to you
 // completing the project These data are not
 // used a first.
@@ -22,21 +22,13 @@ var allowedDateInfo = {
     10: 'November',
     11: 'December'
   },
-  days: {
-    0: 'Monday',
-    1: 'Tuesday',
-    2: 'Wednesday',
-    3: 'Thursday',
-    4: 'Friday',
-    5: 'Saturday',
-    6: 'Sunday',
-  },
   minutes: [0, 30],
   hours: [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
     12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
   ],
-  years: [2015, 2016]
+  years: [2015, 2016],
+  days: lodash.range(1,32)
 };
 
 /**
@@ -45,7 +37,7 @@ var allowedDateInfo = {
 function listEvents(request, response) {
   var currentTime = new Date();
   var contextData = {
-    'events': _.sortByOrder(events.all,'date', 'desc'),
+    'events': lodash.sortByOrder(events.all,'date', 'desc'),
     'time': currentTime
   };
   response.render('event.html', contextData);
@@ -64,20 +56,34 @@ function newEvent(request, response){
  * Validates the form and adds the new event to
  * our global list of events.
  */
+ 
+function isRangedInt(number, name, min, max, errors){
+  if(validator.isInt(number)){
+    var numberAsInt = parseInt(number);
+    if(number >= min && number <= max){
+      return;
+    }
+  }
+  errors.push(name + " should be on int in the range" + min + "to" + max);
+}
+
 function saveEvent(request, response){
-  var contextData = {errors: []};
-
-
-
+  var contextData = {errors: [], allowedDateInfo: allowedDateInfo};
 
   if (validator.isLength(request.body.title, 5, 50) === false) {
     contextData.errors.push('Your title should be between 5 and 100 letters.');
   }
-  
   if (validator.isLength(request.body.location, 5, 50) === false) {
     contextData.errors.push('Your location should be between 5 and 100 letters.');
   }
-  var year = parseInt(request.body.year);
+  
+  isRangedInt(request.body.year, 'year', allowedDateInfo.years[0], allowedDateInfo.years[allowedDateInfo.years.length-1], contextData.errors);
+  isRangedInt(request.body.month, 'month', 0, 11, contextData.errors);
+  isRangedInt(request.body.day, 'day', allowedDateInfo.days[0], allowedDateInfo.days[allowedDateInfo.days.length-1], contextData.errors);
+  isRangedInt(request.body.hour, 'hour', allowedDateInfo.hours[0], allowedDateInfo.hours[allowedDateInfo.hours.length-1], contextData.errors);
+  isRangedInt(request.body.minute, 'minute', allowedDateInfo.minutes[0], allowedDateInfo.minutes[allowedDateInfo.minutes.length-1], contextData.errors);
+ 
+    /*var year = parseInt(request.body.year);
   if(year!==2015 && year!==2016 || !validator.isInt(request.body.year)){
     contextData.errors.push('Year of the event should be an integer and 2015 or 2016');
   }
@@ -92,7 +98,7 @@ function saveEvent(request, response){
   var hour = parseInt(request.body.hour);
   if(!validator.isInt(request.body.hour) || hour > 23 || hour < 0 ){
     contextData.errors.push('Hour should be an integer and between 0 and 23');
-  }
+  }*/
   var image = parseInt(request.body.image);
   if(!validator.isURL(request.body.image)){
     contextData.errors.push('Image should be a URL');
@@ -113,7 +119,7 @@ function saveEvent(request, response){
       title: request.body.title,
       location: request.body.location,
       image: request.body.image,
-      date: new Date(year, month, day, hour),
+      date: new Date,
       attending: []
     };
 // this need work to get theh actual data from the form
@@ -197,6 +203,7 @@ module.exports = {
   'eventDetail': eventDetail,
   'newEvent': newEvent,
   'saveEvent': saveEvent,
+  'isRangedInt': isRangedInt,
   'rsvp': rsvp,
   'api': api
 };
