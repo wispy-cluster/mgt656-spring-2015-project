@@ -2,7 +2,7 @@
 
 var events = require('../models/events');
 var validator = require('validator');
-
+var _ = require('lodash');
 // Date data that would be useful to you
 // completing the project These data are not
 // used a first.
@@ -45,7 +45,7 @@ var allowedDateInfo = {
 function listEvents(request, response) {
   var currentTime = new Date();
   var contextData = {
-    'events': events.all,
+    'events': _.sortByOrder(events.all,'date', 'desc'),
     'time': currentTime
   };
   response.render('event.html', contextData);
