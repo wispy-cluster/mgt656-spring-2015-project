@@ -962,11 +962,6 @@
       "from": "strftime@>=0.9.2 <0.10.0",
       "resolved": "https://registry.npmjs.org/strftime/-/strftime-0.9.2.tgz"
     },
-    "lodash": {
-          "version": "3.7.0",
-          "from": "lodash@>=3.7.0 <3.8.0",
-          "resolved": "https://registry.npmjs.org/lodash/-/lodash-3.7.0.tgz"
-    },
     "validator": {
       "version": "4.2.0",
       "from": "validator@>=4.2.0 <5.0.0",
