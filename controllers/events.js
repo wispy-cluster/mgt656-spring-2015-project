@@ -38,7 +38,7 @@ var allowedDateInfo = {
 function listEvents(request, response) {
   var currentTime = new Date();
   var contextData = {
-    'events': _.sortByOrder(events.all,'date', 'desc'),
+    'events': _.sortByOrder(events.all,'date', 'asc'),
     'time': currentTime
   };
   response.render('event.html', contextData);
