@@ -54,3 +54,4 @@ source.
 * [morgan](https://github.com/expressjs/morgan): HTTP request logger middleware for node.js, written by the people who write Express. This allows us to print pretty logging statements while the application is handling requests.
 * [validator](https://github.com/chriso/validator.js): A library of string validators and sanitizers. This helps us ensure that parameters sent to our application by users are valid.
 * [body-parser](https://github.com/expressjs/body-parser): Node.js body parsing middleware by the people who write Express.
+    //"zombie": "^4.1.0"
