@@ -25,7 +25,7 @@ app.get('/events', eventControllers.listEvents);
 
 app.get('/events/new', eventControllers.newEvent);
 app.get('/api/events', eventControllers.api);
-app.get('/api/events/0', eventControllers.api);
+app.get('/api/events/:id', eventControllers.api);
 app.post('/events/new', eventControllers.saveEvent);
 app.get('/events/:id', eventControllers.eventDetail);
 app.post('/events/:id', eventControllers.rsvp);
