@@ -3,7 +3,6 @@
 var events = require('../models/events');
 var validator = require('validator');
 var lodash = require('../node_modules/jshint/node_modules/lodash');
-var _ = require('lodash');
 // Date data that would be useful to you
 // completing the project These data are not
 // used a first.
