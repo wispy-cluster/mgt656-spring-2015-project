@@ -30,6 +30,5 @@
     "mocha-better-spec-reporter": "^3.0.0",
     "nodemon": "^1.8.0",
     "request": "^2.65.0"
-    //"zombie": "^4.1.0"
   }
 }
