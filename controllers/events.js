@@ -149,6 +149,17 @@ function eventDetail (request, response) {
   response.render('event-detail.html', {event: ev});
 }
 
+function apiDetail (request, response) {
+  var ev = request.params.id;
+  var output = {events: []};
+  for (var i = 0; i < events.all.length ; i++){
+      if(events.all[i].id == ev){
+        output.events.push(events.all[i]);
+        break;
+      }
+  }
+  response.json(output);
+}
 
 function rsvp (request, response){
   var ev = events.getById(parseInt(request.params.id));
@@ -174,7 +185,6 @@ function rsvp (request, response){
 /*function api (request, response){
   var output = {events: []};
   var search = request.query.search;
-  
   if(search){
     for (var i = 0; i < events.all.length; i++){
       if(events.all[i].title.indexOf(search) !== -1){
@@ -183,11 +193,11 @@ function rsvp (request, response){
         output.events.push(events.all[i]);
       }
       }
-    }
-    else{
+  }
+  else{
       for (var i = 0; i < events.all.length; i++){
         output.events.push(events.all[i]);
-    }
+      }
     output.events = events.all;
   }
   response.json(output);
@@ -210,9 +220,17 @@ function api (request, response){
         }
       }
       }
+    }else{
+      for (var i = 0; i < events.all.length; i++){
+        output.events.push(events.all[i]);
+      }
+      output.events = events.all;
     }
     response.json(output);
-}
+  }
+  
+
+
 /**
  * Export all our functions (controllers in this case, because they
  * handles requests and render responses).
@@ -224,5 +242,6 @@ module.exports = {
   'saveEvent': saveEvent,
   'isRangedInt': isRangedInt,
   'rsvp': rsvp,
-  'api': api
+  'api': api,
+  'apiDetail': apiDetail,
 };
