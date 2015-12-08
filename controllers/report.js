@@ -28,6 +28,10 @@ function report5 (request, response) {
   response.render('report5.html', contextData);
 }
 
+function report6 (request, response) {
+  var contextData = {};
+  response.render('report6.html', contextData);
+}
 
 function backlog (request, response) {
   var contextData = {};
@@ -39,6 +43,7 @@ module.exports = {
   'report3' : report3 ,
   'report4' : report4 ,
   'report5' : report5 ,
+  'report6' : report6 ,
   'backlog' : backlog
   
 };
