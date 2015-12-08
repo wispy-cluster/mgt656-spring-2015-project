@@ -67,6 +67,19 @@ function isRangedInt(number, name, min, max, errors){
   errors.push(name + " should be on int in the range" + min + "to" + max);
 }
 
+function checkIntRange(request, fieldName, minVal, maxVal, contextData){
+  var value = null;
+  if (validator.isInt(request.body[fieldName]) === false){
+    contextData.errors.push('Your' + fieldName + 'should be an integer');
+  }else{
+    value = parseInt(request.body[fieldName], 10);
+    if (value > maxVal || value < minVal){
+      contextData.errors.push('Your ' + fieldName + 'should be in the range' + minVal + '-' + maxVal);
+    }
+  }
+  return value;
+}
+
 function saveEvent(request, response){
   var contextData = {errors: [], allowedDateInfo: allowedDateInfo};
 
@@ -77,16 +90,18 @@ function saveEvent(request, response){
     contextData.errors.push('Your location should be between 5 and 100 letters.');
   }
   
-  isRangedInt(request.body.year, 'year', allowedDateInfo.years[0], allowedDateInfo.years[allowedDateInfo.years.length-1], contextData.errors);
+  /*isRangedInt(request.body.year, 'year', allowedDateInfo.years[0], allowedDateInfo.years[allowedDateInfo.years.length-1], contextData.errors);
   isRangedInt(request.body.month, 'month', 0, 11, contextData.errors);
   isRangedInt(request.body.day, 'day', allowedDateInfo.days[0], allowedDateInfo.days[allowedDateInfo.days.length-1], contextData.errors);
   isRangedInt(request.body.hour, 'hour', allowedDateInfo.hours[0], allowedDateInfo.hours[allowedDateInfo.hours.length-1], contextData.errors);
-  isRangedInt(request.body.minute, 'minute', allowedDateInfo.minutes[0], allowedDateInfo.minutes[allowedDateInfo.minutes.length-1], contextData.errors);
+  isRangedInt(request.body.minute, 'minute', allowedDateInfo.minutes[0], allowedDateInfo.minutes[allowedDateInfo.minutes.length-1], contextData.errors);*/
  
-    /*var year = parseInt(request.body.year);
-  if(year!==2015 && year!==2016 || !validator.isInt(request.body.year)){
-    contextData.errors.push('Year of the event should be an integer and 2015 or 2016');
-  }
+  var year = checkIntRange(request, 'year', 2015, 2016, contextData)
+ 
+  //var year = parseInt(request.body.year);
+  //if(year!==2015 && year!==2016 || !validator.isInt(request.body.year)){
+  //  contextData.errors.push('Year of the event should be an integer and 2015 or 2016');
+  //}
   var month = parseInt(request.body.month);
   if(!validator.isInt(request.body.month) || month >11 || month < 1 ){
     contextData.errors.push('Month should be an integer and between 1 and 11');
@@ -98,7 +113,7 @@ function saveEvent(request, response){
   var hour = parseInt(request.body.hour);
   if(!validator.isInt(request.body.hour) || hour > 23 || hour < 0 ){
     contextData.errors.push('Hour should be an integer and between 0 and 23');
-  }*/
+  }
   var image = parseInt(request.body.image);
   if(!validator.isURL(request.body.image)){
     contextData.errors.push('Image should be a URL');
@@ -241,6 +256,7 @@ module.exports = {
   'newEvent': newEvent,
   'saveEvent': saveEvent,
   'isRangedInt': isRangedInt,
+  'checkIntRange': checkIntRange,
   'rsvp': rsvp,
   'api': api,
   'apiDetail': apiDetail,

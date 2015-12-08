@@ -1,8 +1,25 @@
 {% extends "layout.html" %}
-
+  
 {% block mainContent %}
+  
+    <div class="row">
+        <div class="col-sm-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">New Event</h3>
+            </div>
+            <div class="panel-body">
+              Provide details of the event below
+            </div>
+          </div>
+        </div>
+    </div><!-- /.col-sm-4 -->
+  
   {% if errors %}
     <div class="form-errors">
+      <div class="alert alert-danger" role="alert">
+        <strong>Oh snap!</strong> Change a few things up and try submitting again.
+      </div>
       <p>Please correct the following errors!</p>
       <ul>
         {% for error in errors %}
@@ -10,6 +27,7 @@
         {% endfor %}
       </ul>
     </div>
+    
   {% endif %}
 	<form id="create-event" method="POST">
 	  
