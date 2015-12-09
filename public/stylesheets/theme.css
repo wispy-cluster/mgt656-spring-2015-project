@@ -1,7 +1,8 @@
 body {
   padding-top: 70px;
   padding-bottom: 30px;
-  color: #888;
+  color: #777;
+  text-shadow: 1px 1px 1px #ccc;;
 }
 body {
   margin: 0;
