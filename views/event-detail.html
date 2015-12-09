@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 {% block mainContent %}
+<div class="container theme-showcase" role="main">
+  <div class="inner cover">
     <h1 id='title'>
       {{event.title}}
     </h1>
@@ -37,4 +39,6 @@
       </ul>
     </div>
     {% endif %}
+    </div>
+</div>
 {% endblock %}
