@@ -1,5 +1,6 @@
 body {
-  padding: 50px;
+  padding-top: 70px;
+  padding-bottom: 30px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -7,6 +8,25 @@ a {
   color: #00B7FF;
 }
 
+.theme-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
+
+.theme-showcase .navbar .container {
+  width: auto;
+}
+
 .form-errors {
 	color: red;
 }
+
+.global-box p {
+    margin-bottom: 5px;
+}
+
