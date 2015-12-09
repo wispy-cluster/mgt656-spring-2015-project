@@ -1,19 +1,18 @@
 
 {% extends "layout.html" %}
 {% block mainContent %}
+<div class="container theme-showcase" role="main">
     <div class="inner cover">
         <h3 class="cover-heading">Welcome to {{ title }}. {{tagline}} </h3>
         <IMG id="logo" SRC="http://www.ciros-club.com/ashby-de-la-zouch/themes/HTML5boilerplate/images/background.jpg" ALT=“Team Logo Here” WIDTH=150 HEIGHT=150>
-        <p class="lead">Here is our list of events</p>
-        <div style = "border: 1px solid black">
-                {% include "fragments/events-list.html" %}
+        <div class="page-header">
+            <h3>Here is our list of events</h3>
         </div>
-        <p class="lead">    
-            Check out the <a href="/about">About us</a> page
-            as well as the <a href="/events">Events</a> page.
-        </p>
-        <p>
-            <a id="new" href="/events/new">Create a new event</a>
-        </p>
+        <div class="well">
+            <p>
+              {% include "fragments/events-list.html" %}
+            </p>
+        </div>
     </div>
+</div>
 {% endblock %}
