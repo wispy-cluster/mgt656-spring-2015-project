@@ -51,6 +51,11 @@ function newEvent(request, response){
   response.render('create-event.html', contextData);
 }
 
+function donate(request, response){
+  var contextData = {allowedDateInfo: allowedDateInfo};
+  response.render('donate.html', contextData);
+}
+
 /**
  * Controller to which new events are submitted.
  * Validates the form and adds the new event to
@@ -255,6 +260,7 @@ module.exports = {
   'listEvents': listEvents,
   'eventDetail': eventDetail,
   'newEvent': newEvent,
+  'donate': donate,
   'saveEvent': saveEvent,
   'isRangedInt': isRangedInt,
   'checkIntRange': checkIntRange,

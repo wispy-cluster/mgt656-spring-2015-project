@@ -22,7 +22,7 @@ configure(app);
 app.get('/', indexControllers.index);
 app.get('/about', aboutControllers.about);
 app.get('/events', eventControllers.listEvents);
-
+app.get('/donate', eventControllers.donate);
 app.get('/events/new', eventControllers.newEvent);
 app.get('/api/events', eventControllers.api);
 app.get('/api/events/:id', eventControllers.apiDetail);
