@@ -1,12 +1,12 @@
 body {
   padding-top: 70px;
   padding-bottom: 30px;
-  color: #777;
+  color: ##5a5a5a;
   text-shadow: 1px 1px 1px #ccc;;
 }
 body {
   margin: 0;
-  background: url(http://www.mgnevents.co.uk/wp-content/uploads/2013/08/College-prom-Lighting-nightclub-room.jpg) no-repeat center center fixed;
+  background-color: #bbb;
   background-size: cover;
 }
 
