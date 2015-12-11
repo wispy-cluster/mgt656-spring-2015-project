@@ -1,4 +1,15 @@
 {% extends "layout.html" %}
+{% block header %}
+<header>
+<!-- Load the Content Experiment JavaScript API client for the experiment -->
+<script src="//www.google-analytics.com/cx/api.js?experiment=qez_oygrTde2U1kObCFfUw"></script>
+
+<!-- Load the JQuery library -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+</header>
+{% endblock %}
+
 {% block mainContent %}
 <div class="container theme-showcase" role="main">
   <div class="inner cover">
@@ -27,10 +38,9 @@
         <span class="inputcolor"> <input type="email" name="email"></span>
         <button type="submit" class="btn btn-default" name="Submit" id="Submit">RSVP</button>
     </form>
-    <div class='text-left'>
-        <a class='donation' id='donation' href='/donate/'>Donate</a>
+    <div>
+        <a class="btn btn-default" id="donation" href="/donate">Donate</a>
     </div>
-    
     {% if errors %}
     <div class="form-errors">
       <p>Please correct the following errors!</p>
@@ -43,20 +53,14 @@
     {% endif %}
     </div>
 </div>
-{% endblock %}
-
-<!-- Load the Content Experiment JavaScript API client for the experiment -->
-<script src="//www.google-analytics.com/cx/api.js?experiment=qez_oygrTde2U1kObCFfUw"></script>
-
-<!-- Load the JQuery library -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 <script>
 // Define JavaScript for each page variation of this experiment.
 var pageVariations = [
-  function() {},  // Original: Do nothing. This will render the default HTML.
+  function() {
+  },  // Original: Do nothing. This will render the default HTML.
   function() {    // Variation 1: Replace Donate with Support
-    $( 'a.donation' ).text( "Support" );
+    $( 'a#donation' ).text('Support');  
   }
 ];
 
@@ -64,8 +68,8 @@ var pageVariations = [
 $(document).ready(function(){
   // Ask Google Analytics which variation to show the user.
   var chosenVariation = cxApi.chooseVariation();
-
   // Execute the chosen view
   pageVariations[chosenVariation]();
 });
 </script>
+{% endblock %}
