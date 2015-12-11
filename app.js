@@ -37,5 +37,6 @@ app.get('/Report4', reportControllers.report4);
 app.get('/Report5', reportControllers.report5);
 app.get('/Report6', reportControllers.report6);
 app.get('/backlog', reportControllers.backlog);
+app.get('/final', reportControllers.final);
 
 module.exports = app;

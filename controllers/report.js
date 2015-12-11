@@ -37,6 +37,12 @@ function backlog (request, response) {
   var contextData = {};
   response.render('backlog.html', contextData);
 }
+
+function final (request, response) {
+  var contextData = {};
+  response.render('final.html', contextData);
+}
+
 module.exports = {
    'report' : report ,
   'report2' : report2 ,
@@ -44,6 +50,6 @@ module.exports = {
   'report4' : report4 ,
   'report5' : report5 ,
   'report6' : report6 ,
-  'backlog' : backlog
-  
+  'backlog' : backlog ,
+  'final'   : final
 };
